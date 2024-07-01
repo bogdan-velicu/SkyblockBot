@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "tsc && node ./build/BAF.js",
+    "afk": "tsc && node ./build/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-executables-win": "npm install && tsc && pkg ./build/BAF.js --targets node18-macos-x64,node18-linux-x64 --output ./executables/BAF-%npm_package_version%",
     "build-executables-linux": "npm install && tsc && pkg ./build/BAF.js --targets node18-macos-x64,node18-linux-x64 --output ./executables/BAF-${npm_package_version}"
@@ -16,6 +17,7 @@
     "axios": "^0.27.2",
     "json2toml": "^4.0.1",
     "mineflayer": "^4.10.0",
+    "prismarine-viewer": "^1.28.0",
     "prompt-sync": "^4.2.0",
     "toml": "^3.0.0",
     "winston": "^3.8.2",
