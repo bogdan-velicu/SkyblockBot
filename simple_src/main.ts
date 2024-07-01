@@ -1,9 +1,10 @@
 const mineflayer = require("mineflayer");
 const mineflayerViewer = require("prismarine-viewer").mineflayer;
-import winston from "winston";
 import { initAFKHandler, tryToTeleportToIsland } from "./AFKHandler";
 import { sleep } from "./utils";
 import { initLogger, printMcChatToConsole, log } from "./logger";
+import { ChatMessage } from "prismarine-chat";
+
 initLogger();
 
 async function onScoreboardChanged() {
@@ -41,9 +42,12 @@ bot.once("spawn", async () => {
   bot.on("scoreboardTitleChanged", onScoreboardChanged);
 });
 
-bot.on("message", (message) => {
-  printMcChatToConsole(message.toString());
+bot.on("message", (message: ChatMessage, type) => {
+  let text = message.getText(null);
+  if (type == "chat") {
+    printMcChatToConsole(message.toAnsi());
+  }
 });
 
-bot.on("kicked", console.log);
-bot.on("error", console.log);
+bot.on("kicked", console.warn);
+bot.on("error", console.error);
