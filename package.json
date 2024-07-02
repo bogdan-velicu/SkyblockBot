@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "tsc && node ./build/BAF.js",
-    "afk": "tsc && node ./build/main.js  > output.log 2>&1",
+    "afk": "tsc && node ./build/main.js | tee ./build/output.log",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-executables-win": "npm install && tsc && pkg ./build/BAF.js --targets node18-macos-x64,node18-linux-x64 --output ./executables/BAF-%npm_package_version%",
     "build-executables-linux": "npm install && tsc && pkg ./build/BAF.js --targets node18-macos-x64,node18-linux-x64 --output ./executables/BAF-${npm_package_version}"
