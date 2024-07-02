@@ -28,27 +28,27 @@ export async function tryToTeleportToIsland(
   bot: Bot,
   delayBeforeTeleport = 5000,
 ) {
+  if (
+      !bot.scoreboard.sidebar.items
+        .map((item) => item.displayName.getText(null).replace(item.name, ""))
+        .find((e) => e.includes("Purse:") || e.includes("Piggy:"))
+    ) {
+      await sleep(delayBeforeTeleport);
+      log(
+        `Bot seems to be in lobby (Sidebar title = ${bot.scoreboard.sidebar.title}). Sending "/play sb"`,
+      );
+      printMcChatToConsole("§f[§4BAF§f]: §fYou seem to be in the lobby.");
+      printMcChatToConsole("§f[§4BAF§f]: §fWarping back into skyblock...");
+      bot.chat("/play sb");
+      return true;
+    }
+
   if (isLimbo(bot.scoreboard.sidebar)) {
     await sleep(delayBeforeTeleport);
     log('Bot seems to be in limbo. Sending "/lobby"');
     printMcChatToConsole("§f[§4BAF§f]: §fYou seem to be in limbo.");
     printMcChatToConsole("§f[§4BAF§f]: §fWarping back to lobby...");
     bot.chat("/lobby");
-    return true;
-  }
-
-  if (
-    !bot.scoreboard.sidebar.items
-      .map((item) => item.displayName.getText(null).replace(item.name, ""))
-      .find((e) => e.includes("Purse:") || e.includes("Piggy:"))
-  ) {
-    await sleep(delayBeforeTeleport);
-    log(
-      `Bot seems to be in lobby (Sidebar title = ${bot.scoreboard.sidebar.title}). Sending "/play sb"`,
-    );
-    printMcChatToConsole("§f[§4BAF§f]: §fYou seem to be in the lobby.");
-    printMcChatToConsole("§f[§4BAF§f]: §fWarping back into skyblock...");
-    bot.chat("/play sb");
     return true;
   }
 
