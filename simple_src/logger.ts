@@ -93,7 +93,13 @@ export function printMcChatToConsole(string: string) {
     message = a.substring(1, a.length);
     msg += message;
   }
-  console.log("\x1b[0m\x1b[1m\x1b[90m" + msg + "\x1b[0m");
+
+  let date = new Date();
+  let hours = String(date.getHours()).padStart(2, "0");
+  let minutes = String(date.getMinutes()).padStart(2, "0");
+  let formattedTime = `[${hours}:${minutes}]`;
+
+  console.log(formattedTime + " \x1b[0m\x1b[1m\x1b[90m" + msg + "\x1b[0m");
 }
 
 // this function adds a logging function to the wrtie function of the client
